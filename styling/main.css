@@ -4,10 +4,12 @@
   box-sizing: border-box;
 }
 
-body{
-    --rotation: 360deg;
+body {
+  --rotation: 360deg;
 }
 body > .container {
+  width: 100%;
+  overflow: hidden;
   margin-top: 3.5rem;
   padding: 0;
   display: grid;
@@ -32,16 +34,16 @@ body > .container {
     transform: rotate(0deg);
     will-change: transform;
     animation: spin-it 20s linear infinite;
-    &:active{
-        cursor: grabbing;
+    &:active {
+      cursor: grabbing;
     }
   }
 }
 
 @keyframes spin-it {
-    to{
-        transform: rotate(var(--rotation));
-    }
+  to {
+    transform: rotate(var(--rotation));
+  }
 }
 main {
   margin-top: 6.625rem;
