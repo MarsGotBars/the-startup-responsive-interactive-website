@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+    --rotation: 360deg;
+}
+body > .container {
+  margin-top: 3.5rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  > svg {
+    cursor: grab;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 39.75rem;
+    aspect-ratio: 1;
+    padding: 0 32px;
+    path {
+      /* target the circle and the weird overlay circle */
+      &:nth-child(-n + 2) {
+        fill: var(--theme-bg);
+      }
+      /* target all the letters */
+      &:nth-child(n + 3) {
+        fill: var(--theme-text);
+      }
+    }
+    transform: rotate(0deg);
+    will-change: transform;
+    animation: spin-it 20s linear infinite;
+    &:active{
+        cursor: grabbing;
+    }
+  }
+}
+
+@keyframes spin-it {
+    to{
+        transform: rotate(var(--rotation));
+    }
+}
+main {
+  margin-top: 6.625rem;
+}
+h1 {
+  font-weight: 400;
+  span {
+    font-family: var(--para-font);
+    font-weight: 400;
+    color: var(--secondary);
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  svg {
+    height: 100%;
+    max-height: 27px;
+    path {
+      fill: var(--theme-bg);
+      &:nth-child(3) {
+        /* random color here */
+        fill: var(--secondary);
+      }
+    }
+  }
+}
+
+article {
+  margin-top: 1rem;
+  p + p {
+    margin-top: 1rem;
+  }
+}

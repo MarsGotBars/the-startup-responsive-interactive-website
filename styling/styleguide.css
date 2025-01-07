@@ -1,0 +1,101 @@
+/* fonts */
+@font-face {
+  font-family: Antique;
+  src: url("../assets/Fonts/Antique-Legacy/Antique-Legacy-Regular.woff2");
+}
+@font-face {
+  font-family: Antique-light;
+  src: url("../assets/Fonts/Antique-Legacy/Antique-Legacy-Light.woff2");
+}
+@font-face {
+  font-family: Parabole;
+  src: url("../assets/Fonts/Parabole-Display/parabole-displayregular.otf");
+}
+/* default theme */
+body {
+  /* color theme */
+  --orange: #ff7a41;
+  --green: #00c46d;
+  --blue: #0064ff;
+  --yellow: #ffc852;
+  --dark-gray: #333;
+  --white: #fff;
+  --black: #000;
+  /* colors */
+  --background: var(--dark-gray);
+  --primary: var(--white);
+  --secondary: var(--yellow);
+
+  /* ! temp */
+  --logo-color: invert(0);
+
+  /* fonts */
+  --anti-font: Antique;
+  --anti-light-font: Antique-light;
+  --para-font: Parabole;
+
+  /* theme for b&b + JUST logos */
+  --theme-bg: var(--primary);
+  --theme-text: var(--black);
+
+  /* size values */
+  --text-xxl: 7.5rem;
+  --line-xxl: 90%;
+  --text-xl: 4rem;
+  --line-xl: 112%;
+  --text-lg: 2rem;
+  --line-lg: 140%;
+
+  /* styling */
+  background: var(--background);
+  color: var(--primary);
+  max-width: 1440px;
+  margin: 39px auto;
+  font-family: var(--anti-font);
+
+  /* ! temp for scroll testing */
+  height: 200vh;
+}
+
+/* dark theme */
+body[data-theme="light"] {
+  --background: var(--white);
+  --primary: var(--dark-gray);
+  --secondary: var(--orange);
+  --logo-color: invert(1);
+
+  --theme-bg: var(--black);
+  --theme-text: var(--white);
+}
+
+body > * {
+  padding: 0 1rem;
+  @media screen and (min-width: 768px) {
+    padding: 0 3.75rem;
+  }
+}
+
+/* typography */
+.xxl {
+  text-transform: uppercase;
+  font-size: clamp(63px, 5vw, var(--text-xxl));
+  line-height: var(--line-xxl);
+}
+
+.xl {
+  font-size: clamp(44px, 4vw, var(--text-lg));
+  line-height: var(--line-lg);
+}
+
+.lg {
+}
+.md {
+}
+
+.sm {
+}
+
+a {
+  color: var(--secondary);
+  text-decoration: underline;
+}
