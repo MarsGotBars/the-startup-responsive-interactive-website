@@ -16,6 +16,8 @@ body {
   /* color theme */
   --orange: #ff7a41;
   --green: #00c46d;
+  --purple: #a560ff;
+  --pink: #f3a0d6;
   --blue: #0064ff;
   --yellow: #ffc852;
   --dark-gray: #333;
@@ -24,6 +26,7 @@ body {
   /* colors */
   --background: var(--dark-gray);
   --primary: var(--white);
+  /* ? make this one random with js */
   --secondary: var(--yellow);
 
   /* ! temp */
@@ -40,21 +43,25 @@ body {
 
   /* size values */
   --text-xxl: 7.5rem;
-  --line-xxl: 90%;
   --text-xl: 4rem;
-  --line-xl: 112%;
   --text-lg: 2rem;
-  --line-lg: 140%;
+  --text-md: 1.625rem;
+  --text-sm: 1.5rem;
+  --text-xs: 1.25rem;
+  --text-xxs: 1.125rem;
+  --text-minimal: 1rem;
 
+  --line-xxl: 90%;
+  --line-xl: 112%;
+  --line-lg: 128%;
+  --line-md: 140%;
+  --line-sm: 156%;
   /* styling */
   background: var(--background);
   color: var(--primary);
   max-width: 1440px;
   margin: 39px auto;
   font-family: var(--anti-font);
-
-  /* ! temp for scroll testing */
-  height: 200vh;
 }
 
 /* dark theme */
@@ -76,26 +83,52 @@ body > * {
 }
 
 /* typography */
+/* h1 */
 .xxl {
+  font-weight: 400;
   text-transform: uppercase;
-  font-size: clamp(63px, 5vw, var(--text-xxl));
+  font-size: clamp(var(--text-xl), 5vw + 2rem, var(--text-xxl));
   line-height: var(--line-xxl);
 }
-
+/* quote */
 .xl {
-  font-size: clamp(44px, 4vw, var(--text-lg));
+  font-family: var(--anti-light-font);
+  font-size: clamp(var(--text-lg), 8vw, var(--text-xl));
+  line-height: clamp(var(--line-lg), 4vw, var(--line-xl));
+}
+/* h1 subtext */
+.lg {
+  font-family: var(--anti-light-font);
+  font-size: clamp(var(--text-md), 3vw, var(--text-lg));
   line-height: var(--line-lg);
 }
 
-.lg {
-}
+/* h2, sm text heading */
 .md {
+  font-size: clamp(var(--text-sm), 2vw + 1rem, var(--text-md));
+  line-height: var(--line-lg);
+  font-weight: 400;
+  @media (min-width: 1024px) {
+    font-family: var(--anti-light-font);
+  }
+}
+/* sm text */
+.sm {
+  font-family: var(--anti-light-font);
+  font-size: clamp(var(--text-xxs), 2vw, var(--text-xs));
 }
 
-.sm {
+/* theme text sizes */
+.minimal {
+  font-size: var(--text-minimal);
 }
 
 a {
   color: var(--secondary);
   text-decoration: underline;
+}
+
+span,
+.secondary-color {
+  color: var(--secondary);
 }
