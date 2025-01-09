@@ -68,7 +68,6 @@ function setRandomSecondaryColor() {
     "--selection",
     `var(${darkTheme})`
   );
-  console.log(document.body.style.getPropertyValue("--selection"));
   
   // Light theme body
   const lightBody = document.querySelector('body[data-theme="light"]');
