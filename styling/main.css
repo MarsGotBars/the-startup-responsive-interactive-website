@@ -1,19 +1,14 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 body {
   /* max rotation for the b&b logo */
   --rotation: 360deg;
 }
+
 body > .container {
   width: 100%;
   overflow: hidden;
   margin-top: 3.5rem;
   padding: 0;
-  display: grid;
+  display: flex;
   place-items: center;
   > svg {
     /* lessens the grabbable invisible space ever so slightly */
@@ -21,10 +16,11 @@ body > .container {
     overflow: hidden;
     cursor: grab;
     margin: 0 auto;
-    width: 100%;
     max-width: 39.75rem;
     aspect-ratio: 1;
     padding: 0 32px;
+    width: 100%;
+    transform-origin: center;
     path {
       /* target the circle and the weird overlay circle */
       &:nth-child(-n + 2) {
@@ -37,15 +33,36 @@ body > .container {
     }
     transform: rotate(0deg);
     animation: spin-it 20s linear infinite;
+    @media (prefers-reduced-motion) {
+      animation: none;
+    }
     &:active {
       cursor: grabbing;
     }
   }
 }
-
 @keyframes spin-it {
   to {
     transform: rotate(var(--rotation));
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 1.25rem;
+  @media screen and (min-width: 768px) {
+    padding: 0 3.75rem;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 0 5.375rem;
+  }
+  gap: 1.4375rem;
+  @media screen and (min-width: 768) {
+    gap: 1.75rem;
+  }
+  > * {
+    grid-column: 1 / -1;
   }
 }
 
@@ -59,6 +76,10 @@ h1 {
   }
 }
 nav {
+  padding: 1.25rem;
+  @media (min-width: 1024px) {
+    padding: 0 3.75rem;
+  }
   display: flex;
   justify-content: space-between;
   svg {
@@ -69,6 +90,7 @@ nav {
       &:nth-child(3) {
         /* random color here */
         fill: var(--secondary);
+        transition: fill var(--global-transition);
       }
     }
   }
@@ -76,19 +98,13 @@ nav {
 
 main {
   margin-top: 6.625rem;
-  div {
-    margin-top: 1rem;
-    & + div, + article {
-      margin-top: 2.25rem;
-    }
-  }
   > * + * {
     margin-top: 3.75rem;
     @media (min-width: 768px) {
-        margin-top: 5rem;
+      margin-top: 5rem;
     }
     @media (min-width: 1024px) {
-        margin-top: 7.5rem;
+      margin-top: 7.5rem;
     }
   }
 }
@@ -100,10 +116,17 @@ p + p {
 
 select {
   border-radius: 30px;
+  background: var(--secondary);
+  color: var(--black);
+  padding: 0.5rem 0.625rem;
+  text-transform: uppercase;
+  font-family: var(--anti-font);
+  appearance: none;
+  text-align: center;
 }
 
 article h2 + p {
-    margin-top: 21px;
+  margin-top: 21px;
 }
 
 .quote-container {
@@ -112,8 +135,6 @@ article h2 + p {
   blockquote {
     display: flex;
     flex-direction: column;
-    p {
-    }
     span {
       font-size: clamp(94px, 8vw, 7.5rem);
       width: fit-content;
@@ -126,6 +147,66 @@ article h2 + p {
   }
 }
 
+.slider {
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+  }
+  figcaption {
+    font-size: 1rem;
+    font-family: var(--anti-light-font);
+  }
+}
+form {
+  font-size: var(--text-xs);
+  margin-top: 5rem;
+  > * + * {
+    margin-top: 32px;
+  }
+  @media (min-width: 768px) {
+    p {
+      width: 60%;
+    }
+  }
+  div {
+    input {
+      margin-top: 0.5rem;
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 1rem 1.5rem;
+      width: 75%;
+      margin-right: 2rem;
+    }
+    button {
+      text-decoration: underline;
+      text-underline-offset: 0.25rem;
+      border: none;
+      background: transparent;
+    }
+  }
+}
+
+footer {
+  display: flex;
+  width: fit-content;
+  gap: 1.25rem;
+  margin: 5rem auto;
+  margin-bottom: 0;
+  @media (min-width: 768px) {
+    padding: 0 2.5rem;
+    margin: unset;
+    margin-top: 6.25rem;
+  }
+  @media (min-width: 1024px) {
+    margin-top: 7.5rem;
+    padding: 0 5.375rem;
+  }
+  a {
+    color: var(--primary);
+    text-underline-offset: 0.25rem;
+  }
+}
 @media screen and (min-width: 768px) {
 }
 @media screen and (min-width: 1024px) {

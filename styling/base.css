@@ -11,6 +11,11 @@
   font-family: Parabole;
   src: url("../assets/Fonts/Parabole-Display/parabole-displayregular.otf");
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /* default theme */
 body {
   /* color theme */
@@ -26,11 +31,9 @@ body {
   /* colors */
   --background: var(--dark-gray);
   --primary: var(--white);
-  /* ? make this one random with js */
   --secondary: var(--yellow);
-
-  /* ! temp */
-  --logo-color: invert(0);
+  --selection: var(--orange);
+  --selection-color: var(--dark-gray);
 
   /* fonts */
   --anti-font: Antique;
@@ -56,12 +59,22 @@ body {
   --line-lg: 128%;
   --line-md: 140%;
   --line-sm: 156%;
+
+  /* transition */
+  --global-transition: .3s linear;
   /* styling */
   background: var(--background);
   color: var(--primary);
   max-width: 1440px;
-  margin: 39px auto;
+  margin: 2.5rem auto;
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+  }
+  @media (min-width: 1024px) {
+    margin: 3.75rem auto;
+  }
   font-family: var(--anti-font);
+  transition: background var(--global-transition);
 }
 
 /* dark theme */
@@ -69,17 +82,11 @@ body[data-theme="light"] {
   --background: var(--white);
   --primary: var(--dark-gray);
   --secondary: var(--orange);
-  --logo-color: invert(1);
+  --selection: var(--yellow);
+  --selection-color: var(--white);
 
   --theme-bg: var(--black);
   --theme-text: var(--white);
-}
-
-body > * {
-  padding: 0 1rem;
-  @media screen and (min-width: 768px) {
-    padding: 0 3.75rem;
-  }
 }
 
 /* typography */
@@ -125,10 +132,21 @@ body > * {
 
 a {
   color: var(--secondary);
+  transition: color var(--global-transition);
   text-decoration: underline;
 }
 
 span,
 .secondary-color {
   color: var(--secondary);
+  transition: color var(--global-transition);
+}
+
+.primary-color {
+  color: var(--primary)
+}
+
+::selection{
+  background-color: var(--selection);
+  color: var(--selection-color);
 }

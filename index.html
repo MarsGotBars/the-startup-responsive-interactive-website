@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styling/styleguide.css" />
+    <link rel="stylesheet" href="styling/base.css" />
     <link rel="stylesheet" href="styling/main.css" />
     <link
       rel="shortcut icon"
@@ -59,8 +59,10 @@
           />
         </svg>
       </a>
-      <select name="theme" id="">
+      <select name="theme">
         <option value="dark" selected>dark mode</option>
+        <option value="light">light mode</option>
+        <option value="os">os mode</option>
       </select>
     </nav>
     <!-- b&b -->
@@ -204,11 +206,31 @@
           engage seamlessly with your content or services.
         </p>
       </article>
-    </main>
-    <form action="">
+      <figure class="slider">
+        <img src="./assets/Images/slide0.JPG" alt="" />
+        <figcaption>
+          <span class="slide">1/10</span> Tizian Fendt, UX designer at JUST
+          talking about why accessibility matters.
+        </figcaption>
+      </figure>
+      <form>
         <h2 class="xxl">Join our next events</h2>
-        <p>Do you want to join our next Bread & Butter event? Leave your email and we’ll keep you up to date.</p>
-        <div><input type="email" name="" id=""><button type="submit">Sign up</button></div>
-    </form>
+        <p>
+          Do you want to join our next Bread & Butter event? Leave your email
+          and we’ll keep you up to date.
+        </p>
+        <div>
+          <label for="email">E-mail</label>
+          <div>
+            <input type="email" name="email" id="email" required />
+            <button type="submit" class="secondary-color">Sign up</button>
+          </div>
+        </div>
+      </form>
+    </main>
+    <footer>
+      <a href="mailto:hello@just.agency">hello@just.agency</a>
+      <a href="tel:+31885878000">+31 (0)88 587 8000</a>
+    </footer>
   </body>
 </html>
