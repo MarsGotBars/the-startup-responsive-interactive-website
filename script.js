@@ -8,9 +8,10 @@ const getInitialTheme = () => {
   const savedSelection = localStorage.getItem("selected");
   if (savedSelection) {
     selectElement.value = savedSelection;
-  }
+  } else selectElement.selectedIndex = 2
+  
   if (savedTheme) return savedTheme;
-  // Media query check in js
+  // Media query check in js in case of no localstorage present
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
@@ -35,6 +36,7 @@ selectElement.addEventListener("change", (event) => {
   }
   localStorage.setItem("selected", selectedValue);
 });
+
 const getOsTheme = () => {
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   setTheme(isDarkMode ? "dark" : "light");
