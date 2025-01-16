@@ -152,78 +152,60 @@ handleScreenChange(mediaQuery);
 mediaQuery.addEventListener("change", handleScreenChange);
 
 // slider stuff
-const sliderFigure = document.querySelector(".slider");
+const slider = document.querySelector(".slider");
 const images = document.querySelectorAll(".slider img");
-const imageContainer = document.querySelector(".container");
 const caption = document.querySelector(".slide");
 const slideAmount = images.length;
 
-let prevSlideMemory;
 let globalCurrentSlide = 0;
+const [backwardButton, forwardButton] = slider.querySelectorAll(":scope > button");
 
-
-// get both buttons and set them on backward & forward
-const [backwardButton, forwardButton] =
-  sliderFigure.querySelectorAll(":scope > button");
-
-backwardButton.addEventListener("click", (e) => {
-  slideFunc(e, -1)
-});
-forwardButton.addEventListener("click", (e) => {
-  slideFunc(e, 1)
-});
-
-const slideFunc = (e, direction) => {
-  const nextSlide = (globalCurrentSlide + direction + slideAmount) % slideAmount;
-
-  if (images[nextSlide]) {
-    // Use scrollIntoView to scroll to the target slide
-    images[nextSlide].scrollIntoView({
-      behavior: "instant",
-      block: "nearest",
-      inline: "center",
-    });
-  }
+// Utility to set the active slide
+const setActiveSlide = (slideIndex) => {
+  images.forEach((img, index) => {
+    img.classList.toggle("active", index === slideIndex);
+  });
+  updateCaption(slideIndex);
 };
 
-const updateSlideNumber = (slide) => {
-  // Update globalCurrentSlide and the caption
-  globalCurrentSlide = slide;
+// Slide function
+const slideFunc = (direction) => {
+  globalCurrentSlide = (globalCurrentSlide + direction + slideAmount) % slideAmount;
+  setActiveSlide(globalCurrentSlide);
+
+  images[globalCurrentSlide].scrollIntoView({
+    behavior: "smooth", // Use smooth scrolling for better UX
+    block: "nearest",
+    inline: "center",
+  });
 };
 
-const updateCaption = (slide) => {
-  caption.textContent = `${(slide % slideAmount) + 1}/${slideAmount}`;
+// Update caption text
+const updateCaption = (slideIndex) => {
+  caption.textContent = `${slideIndex + 1}/${slideAmount}`;
 };
 
-const previousToggle = (slide) => {
-  console.log(slide, 'prevshit');
-  
-  slide.classList.toggle('active')
-}
-
+// Intersection observer to track visibility
 const observer = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach(entry => {
+  (entries) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if(prevSlideMemory){
-          previousToggle(prevSlideMemory)
-        }
         const currentSlide = Array.from(images).indexOf(entry.target);
-        prevSlideMemory = images[currentSlide]
-        prevSlideMemory.classList.toggle('active')
         if (currentSlide !== globalCurrentSlide) {
-          updateSlideNumber(currentSlide);
-          updateCaption(currentSlide);
+          globalCurrentSlide = currentSlide;
+          setActiveSlide(globalCurrentSlide);
         }
       }
     });
   },
   { threshold: 0.5 }
-  // Trigger when 50% of the image is in view
-); 
+);
 
-images.forEach((img) => {
-  observer.observe(img);
-});
-// initial caption
-updateCaption(slideAmount)
+// Attach event listeners and initialize
+backwardButton.addEventListener("click", () => slideFunc(-1));
+forwardButton.addEventListener("click", () => slideFunc(1));
+images.forEach((img) => observer.observe(img));
+
+// Initialize active state
+setActiveSlide(globalCurrentSlide);
+
