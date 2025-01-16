@@ -33,7 +33,7 @@ body {
   --white: #fff;
   --black: #000;
   /* colors */
-  --background: var(--dark-gray);
+  --background: var(--black);
   --primary: var(--white);
   --secondary: var(--yellow);
   --selection: var(--orange);

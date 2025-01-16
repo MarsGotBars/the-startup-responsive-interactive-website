@@ -8,8 +8,8 @@ const getInitialTheme = () => {
   const savedSelection = localStorage.getItem("selected");
   if (savedSelection) {
     selectElement.value = savedSelection;
-  } else selectElement.selectedIndex = 2
-  
+  } else selectElement.selectedIndex = 2;
+
   if (savedTheme) return savedTheme;
   // Media query check in js in case of no localstorage present
   return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -22,7 +22,7 @@ const setTheme = (theme) => {
   bodyTheme.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
   // randomize on each call
-  setRandomSecondaryColor()
+  setRandomSecondaryColor();
 };
 
 // Listen for changes on the select element
@@ -61,28 +61,16 @@ function getRandomColor(colorArray) {
 // Apply random colors to the body --secondary property
 function setRandomSecondaryColor() {
   // Main body (dark theme)
-  const darkTheme = getRandomColor(darkThemeColors)
-  document.body.style.setProperty(
-    "--secondary",
-    `var(${darkTheme})`
-  );
-  document.body.style.setProperty(
-    "--selection",
-    `var(${darkTheme})`
-  );
-  
+  const darkTheme = getRandomColor(darkThemeColors);
+  document.body.style.setProperty("--secondary", `var(${darkTheme})`);
+  document.body.style.setProperty("--selection", `var(${darkTheme})`);
+
   // Light theme body
   const lightBody = document.querySelector('body[data-theme="light"]');
   if (lightBody) {
-    const lightTheme = getRandomColor(lightThemeColors)
-    lightBody.style.setProperty(
-      "--secondary",
-      `var(${lightTheme})`
-    );
-    lightBody.style.setProperty(
-      "--selection",
-      `var(${lightTheme})`
-    );
+    const lightTheme = getRandomColor(lightThemeColors);
+    lightBody.style.setProperty("--secondary", `var(${lightTheme})`);
+    lightBody.style.setProperty("--selection", `var(${lightTheme})`);
   }
 }
 
@@ -162,3 +150,41 @@ function handleScreenChange(e) {
 // Initial setup
 handleScreenChange(mediaQuery);
 mediaQuery.addEventListener("change", handleScreenChange);
+
+// slider stuff
+const sliderFigure = document.querySelector(".slider");
+console.log(sliderFigure.children);
+
+// get both buttons and set them on backward & forward
+const [backwardButton, forwardButton] =
+  sliderFigure.querySelectorAll(":scope > button");
+backwardButton.addEventListener("click", () => {
+  console.log("back to the future");
+});
+forwardButton.addEventListener("click", () => {
+  console.log("forwards to the future");
+});
+
+const images = document.querySelectorAll(".slider img");
+const caption = document.querySelector(".slide");
+
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let currentSlide = Array.from(images).indexOf(entry.target);
+        const imgNumber = currentSlide;
+        const img = entry.target;
+        caption.textContent = `${(imgNumber % 9) + 1}/9`;
+        if (img.dataset.imageNumber === 9) {
+          document.cloneNode.img;
+        }
+      }
+    });
+  },
+  { threshold: 0.5 }
+); // Trigger when 50% of the image is in view
+
+images.forEach((img) => {
+  observer.observe(img);
+});
