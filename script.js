@@ -153,38 +153,65 @@ mediaQuery.addEventListener("change", handleScreenChange);
 
 // slider stuff
 const sliderFigure = document.querySelector(".slider");
-console.log(sliderFigure.children);
+const images = document.querySelectorAll(".slider img");
+const imageContainer = document.querySelector(".container");
+const caption = document.querySelector(".slide");
+const slideAmount = images.length;
+
+let globalCurrentSlide = 0;
 
 // get both buttons and set them on backward & forward
 const [backwardButton, forwardButton] =
   sliderFigure.querySelectorAll(":scope > button");
-backwardButton.addEventListener("click", () => {
-  console.log("back to the future");
+backwardButton.addEventListener("click", (e) => {
+  slideFunc(e, -1)
 });
-forwardButton.addEventListener("click", () => {
-  console.log("forwards to the future");
+forwardButton.addEventListener("click", (e) => {
+  slideFunc(e, 1)
 });
 
-const images = document.querySelectorAll(".slider img");
-const caption = document.querySelector(".slide");
+const slideFunc = (e, direction) => {
+  const nextSlide = (globalCurrentSlide + direction + slideAmount) % slideAmount;
+
+  // Calculate the position to scroll to (the index of the next slide)
+  const scrollPosition = images[nextSlide].offsetLeft;
+  console.log(scrollPosition, nextSlide);
+  imageContainer.scrollTo({
+    left: scrollPosition,
+    behavior: "smooth"
+  })
+  updateSlideNumber(nextSlide);
+};
+
+const updateSlideNumber = (slide) => {
+  // Update globalCurrentSlide and the caption
+  globalCurrentSlide = slide;
+  updateCaption(slide);
+};
+
+const updateCaption = (slide) => {
+  caption.textContent = `${(slide % slideAmount) + 1}/${slideAmount}`;
+};
+
 
 const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        let currentSlide = Array.from(images).indexOf(entry.target);
-        const imgNumber = currentSlide;
-        const img = entry.target;
-        caption.textContent = `${(imgNumber % 9) + 1}/${images.length}`;
-        if (img.dataset.imageNumber === 9) {
-          document.cloneNode.img;
+        const currentSlide = Array.from(images).indexOf(entry.target);
+
+        if (currentSlide !== globalCurrentSlide) {
+          updateSlideNumber(currentSlide);
         }
       }
     });
   },
   { threshold: 0.5 }
-); // Trigger when 50% of the image is in view
+  // Trigger when 50% of the image is in view
+); 
 
 images.forEach((img) => {
   observer.observe(img);
 });
+// initial caption
+updateCaption(slideAmount)

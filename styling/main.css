@@ -210,7 +210,7 @@ article h2 + p {
       position: static;
     }
   }
-  .slider {
+  .container {
     grid-area: slider;
     position: relative;
     overflow-x: scroll;
