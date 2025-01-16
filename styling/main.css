@@ -169,11 +169,13 @@ article h2 + p {
     z-index: 2;
     position: absolute;
     right: 0;
+    gap: 1rem;
     &:hover{
       svg{
         scale: .9;
       }
     }
+    /* move transitions and animations up */
     svg {
       width: clamp(4rem, 8vw, 160px);
       transition: 0.4s ease;
@@ -186,7 +188,7 @@ article h2 + p {
         scale: .9;
         path {
           fill: var(--secondary);
-          &:first-of-type {
+          &:last-of-type {
             fill: transparent;
           }
         }

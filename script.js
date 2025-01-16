@@ -175,7 +175,7 @@ const observer = new IntersectionObserver(
         let currentSlide = Array.from(images).indexOf(entry.target);
         const imgNumber = currentSlide;
         const img = entry.target;
-        caption.textContent = `${(imgNumber % 9) + 1}/9`;
+        caption.textContent = `${(imgNumber % 9) + 1}/${images.length}`;
         if (img.dataset.imageNumber === 9) {
           document.cloneNode.img;
         }
