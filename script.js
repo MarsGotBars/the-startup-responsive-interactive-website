@@ -158,11 +158,14 @@ const imageContainer = document.querySelector(".container");
 const caption = document.querySelector(".slide");
 const slideAmount = images.length;
 
+let prevSlideMemory;
 let globalCurrentSlide = 0;
+
 
 // get both buttons and set them on backward & forward
 const [backwardButton, forwardButton] =
   sliderFigure.querySelectorAll(":scope > button");
+
 backwardButton.addEventListener("click", (e) => {
   slideFunc(e, -1)
 });
@@ -173,35 +176,44 @@ forwardButton.addEventListener("click", (e) => {
 const slideFunc = (e, direction) => {
   const nextSlide = (globalCurrentSlide + direction + slideAmount) % slideAmount;
 
-  // Calculate the position to scroll to (the index of the next slide)
-  const scrollPosition = images[nextSlide].offsetLeft;
-  console.log(scrollPosition, nextSlide);
-  imageContainer.scrollTo({
-    left: scrollPosition,
-    behavior: "smooth"
-  })
-  updateSlideNumber(nextSlide);
+  if (images[nextSlide]) {
+    // Use scrollIntoView to scroll to the target slide
+    images[nextSlide].scrollIntoView({
+      behavior: "instant",
+      block: "nearest",
+      inline: "center",
+    });
+  }
 };
 
 const updateSlideNumber = (slide) => {
   // Update globalCurrentSlide and the caption
   globalCurrentSlide = slide;
-  updateCaption(slide);
 };
 
 const updateCaption = (slide) => {
   caption.textContent = `${(slide % slideAmount) + 1}/${slideAmount}`;
 };
 
+const previousToggle = (slide) => {
+  console.log(slide, 'prevshit');
+  
+  slide.classList.toggle('active')
+}
 
 const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        if(prevSlideMemory){
+          previousToggle(prevSlideMemory)
+        }
         const currentSlide = Array.from(images).indexOf(entry.target);
-
+        prevSlideMemory = images[currentSlide]
+        prevSlideMemory.classList.toggle('active')
         if (currentSlide !== globalCurrentSlide) {
           updateSlideNumber(currentSlide);
+          updateCaption(currentSlide);
         }
       }
     });

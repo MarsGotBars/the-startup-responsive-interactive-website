@@ -156,6 +156,7 @@ article h2 + p {
   grid-template-areas:
     "arrow-left slider arrow-right"
     ". caption .";
+  gap: 0.75rem 0;
   button {
     cursor: pointer;
     display: flex;
@@ -170,9 +171,9 @@ article h2 + p {
     position: absolute;
     right: 0;
     gap: 1rem;
-    &:hover{
-      svg{
-        scale: .9;
+    &:hover {
+      svg {
+        scale: 0.9;
       }
     }
     /* move transitions and animations up */
@@ -185,7 +186,7 @@ article h2 + p {
         }
       }
       &:hover {
-        scale: .9;
+        scale: 0.9;
         path {
           fill: var(--secondary);
           &:last-of-type {
@@ -214,16 +215,36 @@ article h2 + p {
     grid-area: slider;
     position: relative;
     overflow-x: auto;
+    overflow-y: hidden;
     /* scrollbar-width: none; */
     scroll-snap-type: x mandatory;
+    scroll-behavior: auto;
     max-width: 52rem;
     display: flex;
     gap: 1rem;
     img {
+      /* Default state for all images */
+      transform: translateY(10%);
+      transition: transform 0.5s ease;
       width: 100%;
-      flex: 0 0 100%; /* Makes each image take full width of container */
-      scroll-snap-align: start; /* Added this to make images snap */
+      flex: 0 0 100%;
+      scroll-snap-align: start;
       aspect-ratio: 1;
+    }
+    
+    img.active {
+      /* Active state for the current image */
+      transform: translateY(0%);
+    }
+    
+    /* When an image is next to the active image */
+    img.active ~ img {
+      transform: translateY(-10%);
+    }
+    
+    /* Reset transform to initial state for inactive images */
+    img:not(.active):not(.active ~ img) {
+      transform: translateY(10%);
     }
   }
   figcaption {
