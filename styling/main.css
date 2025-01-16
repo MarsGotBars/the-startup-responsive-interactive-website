@@ -2,6 +2,14 @@ body {
     /* max rotation for the b&b logo */
     --rotation: 360deg;
   }
+
+  *, * > * {
+    @media (prefers-reduced-motion) {
+      transform: translate(unset) !important;
+      transition: none !important;
+      animation: none !important;
+    }
+  }
   
   body > .container {
     width: 100%;
@@ -214,29 +222,34 @@ body {
     .container {
       grid-area: slider;
       position: relative;
-      overflow-x: auto;
+      overflow-x: scroll;
+      scrollbar-width: none;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       max-width: 52rem;
       display: flex;
       gap: 1rem;
-    
+      &:hover{
+        cursor: grab;
+      }
+      &:active{
+        cursor: w-resize;
+      }
       img {
         position: relative;
-        transform: translate(0, 6rem);
         transition: 0.5s ease;
         width: 100%;
         flex: 0 0 100%;
         scroll-snap-align: start;
-        aspect-ratio: 1;
+        aspect-ratio: 1;        
+        transform: translate(0, 6rem);
         &.active{
           transform: translate(0, 0rem);
           &~img{
             transform: translate(0, -6rem);
           }
         }
-        
       }
     }
     figcaption {

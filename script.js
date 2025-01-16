@@ -151,9 +151,10 @@ function handleScreenChange(e) {
 handleScreenChange(mediaQuery);
 mediaQuery.addEventListener("change", handleScreenChange);
 
-// slider stuff
+// Slider stuff
 const slider = document.querySelector(".slider");
 const images = document.querySelectorAll(".slider img");
+const imageContainer = document.querySelector(".slider .container")
 const caption = document.querySelector(".slide");
 const slideAmount = images.length;
 
@@ -174,7 +175,8 @@ const slideFunc = (direction) => {
   setActiveSlide(globalCurrentSlide);
 
   images[globalCurrentSlide].scrollIntoView({
-    behavior: "smooth", // Use smooth scrolling for better UX
+    // Weirdly setting this to smooth fixes the jitter
+    behavior: "smooth",
     block: "nearest",
     inline: "center",
   });
@@ -206,6 +208,34 @@ backwardButton.addEventListener("click", () => slideFunc(-1));
 forwardButton.addEventListener("click", () => slideFunc(1));
 images.forEach((img) => observer.observe(img));
 
-// Initialize active state
+// Initialize initial state (First slide)
 setActiveSlide(globalCurrentSlide);
 
+let isMouseDown = false;
+let startX;
+
+// Only able to initiate when you click on the container
+imageContainer.addEventListener('mousedown', (e) => {
+  isMouseDown = true;
+  startX = e.pageX;
+  e.preventDefault();
+});
+
+document.addEventListener('mouseup', () => {
+  isMouseDown = false;
+});
+
+// Set to document so you can keep mouse moving across the page
+document.addEventListener('mousemove', (e) => {
+  if (!isMouseDown) return;
+  const moveX = e.pageX - startX;
+  if (moveX > 100) {
+    slideFunc(-1);
+    // Reset the position
+    startX = e.pageX;
+  } else if (moveX < -100) {
+    slideFunc(1);
+    // Reset the position
+    startX = e.pageX;
+  }
+});
