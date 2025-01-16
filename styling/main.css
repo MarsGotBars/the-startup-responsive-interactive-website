@@ -213,8 +213,8 @@ article h2 + p {
   .container {
     grid-area: slider;
     position: relative;
-    overflow-x: scroll;
-    scrollbar-width: none;
+    overflow-x: auto;
+    /* scrollbar-width: none; */
     scroll-snap-type: x mandatory;
     max-width: 52rem;
     display: flex;
