@@ -156,6 +156,7 @@ body {
   }
   
   .slider {
+    max-height: 95vh;
     display: grid;
     position: relative;
     align-items: center;
@@ -184,6 +185,12 @@ body {
           scale: 0.9;
         }
       }
+      &:active{
+        transition: .1s;
+        svg{
+          scale: 1.1;
+        }
+      }
       /* move transitions and animations up */
       svg {
         width: clamp(4rem, 8vw, 160px);
@@ -194,7 +201,6 @@ body {
           }
         }
         &:hover {
-          scale: 0.9;
           path {
             fill: var(--secondary);
             &:last-of-type {
@@ -220,6 +226,7 @@ body {
       }
     }
     .container {
+      height: 100%;
       grid-area: slider;
       position: relative;
       overflow-x: scroll;
@@ -230,6 +237,7 @@ body {
       max-width: 52rem;
       display: flex;
       gap: 1rem;
+      aspect-ratio: 1;
       &:hover{
         cursor: grab;
       }
@@ -253,6 +261,7 @@ body {
       }
     }
     figcaption {
+      height: auto ;
       grid-area: caption;
       font-size: 1rem;
       font-family: var(--anti-light-font);

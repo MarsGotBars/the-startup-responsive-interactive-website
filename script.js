@@ -86,11 +86,12 @@ const bodyThemeChecker = () => {
 // Initial setup
 setTheme(getInitialTheme());
 
-// rotation stuff, only if on laptop or larger screen
+// Rotation stuff, only if on laptop or larger screen
 const mediaQuery = window.matchMedia("(min-width: 1024px)");
 const circle = document.getElementById("circle");
 let isDragging = false;
 let startAngle = 0;
+
 
 function calculateAngle(e, element) {
   const rect = element.getBoundingClientRect();
@@ -221,12 +222,12 @@ imageContainer.addEventListener('mousedown', (e) => {
   e.preventDefault();
 });
 
-document.addEventListener('mouseup', () => {
+imageContainer.addEventListener('mouseup', () => {
   isMouseDown = false;
 });
 
 // Set to document so you can keep mouse moving across the page
-document.addEventListener('mousemove', (e) => {
+imageContainer.addEventListener('mousemove', (e) => {
   if (!isMouseDown) return;
   const moveX = e.pageX - startX;
   if (moveX > 100) {
