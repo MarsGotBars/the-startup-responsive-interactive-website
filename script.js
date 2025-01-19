@@ -20,6 +20,7 @@ const getInitialTheme = () => {
 // Set theme and save to localStorage
 const setTheme = (theme) => {
   bodyTheme.setAttribute("data-theme", theme);
+  // store which theme the user prefers (this is for the theme)
   localStorage.setItem("theme", theme);
   // randomize on each call
   setRandomSecondaryColor();
@@ -28,12 +29,13 @@ const setTheme = (theme) => {
 // Listen for changes on the select element
 selectElement.addEventListener("change", (event) => {
   const selectedValue = event.target.value; // Get the index of the selected option
-
+  // specific if statement to check for OS setting
   if (selectedValue === "os") {
     getOsTheme();
   } else {
     setTheme(selectedValue);
   }
+  // store which theme the user prefers (this is for the select element)
   localStorage.setItem("selected", selectedValue);
 });
 
@@ -92,7 +94,7 @@ const circle = document.getElementById("circle");
 let isDragging = false;
 let startAngle = 0;
 
-
+// mathmatical calculation to move the circle based on how far away / close the mouse is
 function calculateAngle(e, element) {
   const rect = element.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
@@ -102,6 +104,7 @@ function calculateAngle(e, element) {
   return Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 }
 
+// While holding, set the rotation to let the user manipulate at which angle the rotation will continue
 function handleMouseDown(e) {
   isDragging = true;
   startAngle =
@@ -109,13 +112,15 @@ function handleMouseDown(e) {
   circle.style.animationPlayState = "paused";
 }
 
+// -360 repeats a lot in this function so made it its own var, minus will make it spin left and + will make it spin right
+const rotationalDirection = -360;
 function handleMouseMove(e) {
   if (!isDragging) return;
   const currentAngle = calculateAngle(e, circle);
   const rotation = currentAngle - startAngle;
-  circle.style.transform = `rotate(${rotation % 360}deg)`;
-  circle.dataset.rotation = rotation % 360;
-  document.body.style.setProperty("--rotation", `${360 + (rotation % 360)}deg`);
+  circle.style.transform = `rotate(${rotation % rotationalDirection}deg)`;
+  circle.dataset.rotation = rotation % rotationalDirection;
+  document.body.style.setProperty("--rotation", `${rotationalDirection + (rotation % rotationalDirection)}deg`);
 }
 
 function handleMouseUp() {
@@ -216,18 +221,22 @@ let isMouseDown = false;
 let startX;
 
 // Only able to initiate when you click on the container
-imageContainer.addEventListener('mousedown', (e) => {
+imageContainer.addEventListener("mousedown", (e) => {
   isMouseDown = true;
   startX = e.pageX;
   e.preventDefault();
 });
 
-imageContainer.addEventListener('mouseup', () => {
+// Disable if not holding / when leaving
+imageContainer.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
+imageContainer.addEventListener("mouseleave", ()=> {
+  isMouseDown = false;
+})
 
 // Set to document so you can keep mouse moving across the page
-imageContainer.addEventListener('mousemove', (e) => {
+imageContainer.addEventListener("mousemove", (e) => {
   if (!isMouseDown) return;
   const moveX = e.pageX - startX;
   if (moveX > 100) {

@@ -133,21 +133,23 @@
       </svg>
     </div>
     <main>
-      <section>
-        <h1 class="xxl">The future of <span>accessibility</span></h1>
-        <div class="lg">
-          <p>
-            On November 28, we hosted our first Bread & Butter event—a moment to
-            share insights and connect with clients.
-          </p>
-          <p>
-            This edition focused on “The Future of Accessibility”, featuring a
-            workshop by the inspiring
-            <a href="https://leidenuni.academia.edu/FSamSin/CurriculumVitae"
-              >Fresco Sam-Sin</a
-            >
-            and a talk from Tizian Fendt, UX Designer at JUST.
-          </p>
+      <section class="intro">
+        <div class="group">
+          <h1 class="xxl">The future of <span>accessibility</span></h1>
+          <div class="lg">
+            <p>
+              On November 28, we hosted our first Bread & Butter event—a moment
+              to share insights and connect with clients.
+            </p>
+            <p>
+              This edition focused on “The Future of Accessibility”, featuring a
+              workshop by the inspiring
+              <a href="https://leidenuni.academia.edu/FSamSin/CurriculumVitae"
+                >Fresco Sam-Sin</a
+              >
+              and a talk from Tizian Fendt, UX Designer at JUST.
+            </p>
+          </div>
         </div>
         <div class="sm">
           <p>
@@ -172,7 +174,6 @@
       </section>
       <figure class="quote-container">
         <blockquote class="xl">
-          <span>“</span>
           <p>
             Digital Accessibility improves the experience for all users, not
             just those with disabilities.
@@ -209,7 +210,6 @@
       </article>
       <figure class="slider">
         <button class="minimal">
-          <span>previous slide</span>
           <svg
             viewBox="0 0 156 150"
             fill="none"
@@ -237,7 +237,6 @@
           <img src="./assets/Images/slide9.JPG" alt="" />
         </div>
         <button class="minimal">
-          <span>next slide</span>
           <svg
             viewBox="0 0 156 150"
             fill="none"
@@ -264,12 +263,14 @@
           Do you want to join our next Bread & Butter event? Leave your email
           and we’ll keep you up to date.
         </p>
-        <div>
+        <div class="wrapper">
           <label for="email">E-mail</label>
           <div>
             <input type="email" name="email" id="email" required />
-            <button type="submit" class="secondary-color">Sign up</button>
+            <span></span>
+            <input type="submit" class="secondary-color" value="Sign up">
           </div>
+          <p></p>
         </div>
       </form>
     </main>
