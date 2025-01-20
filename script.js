@@ -249,3 +249,23 @@ imageContainer.addEventListener("mousemove", (e) => {
     startX = e.pageX;
   }
 });
+
+// Display arrows & remove scroll bar
+// Reusing the earlier established backward & forward buttons
+backwardButton.style.display = "flex";
+forwardButton.style.display = "flex";
+imageContainer.style.scrollbarWidth = "none";
+// All img containers I want to put random stickers in
+const stickerSpots = document.querySelectorAll(".sticker img")
+// All the assets, using a for loop to get them out of the Stickers directory without server side code
+const stickerOptions = []
+for (let i = 1; i < 25; i++) {
+  stickerOptions.push(`./assets/Stickers/sticker${i}.svg`)
+}
+// For each item in stickerSpots, create a random integer (rounded number) based on the length of the stickerOptions array, 
+// set the src of the spot as nth stickerOption, splice (remove) the set option out of the array.
+stickerSpots.forEach(stickerSpot => {
+  const randomInt = Math.floor(Math.random() * stickerOptions.length)
+  stickerSpot.src = stickerOptions[randomInt]
+  stickerOptions.splice(randomInt, 1)
+});

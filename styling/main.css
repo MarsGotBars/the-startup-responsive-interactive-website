@@ -46,8 +46,16 @@ body > .container {
         fill: var(--theme-text);
       }
     }
+    &:hover {
+      path:nth-child(n + 3) {
+        fill: var(--secondary);
+      }
+    }
     transform: rotate(360deg);
     animation: spin-it 20s linear infinite;
+    @media (hover: none) {
+      pointer-events: none;
+    }
     @media (prefers-reduced-motion) {
       animation: none;
     }
@@ -134,7 +142,7 @@ select {
   font-family: var(--anti-font);
   appearance: none;
   text-align: center;
-  transition-delay: 0.3s;
+  transition-delay: 0.25s;
   &:hover {
     transition: 0s;
     background: var(--background);
@@ -172,29 +180,30 @@ article h2 + p {
     font-size: var(--text-xl);
   }
 }
-
+/* used grid areas for overly complex boxes */
 .slider {
   max-height: 95vh;
   display: grid;
   position: relative;
   align-items: center;
-  grid-template-rows: auto auto;
-  grid-template-columns: auto auto auto;
-  grid-template-areas:
-    "arrow-left slider arrow-right"
-    ". caption .";
+  grid-template-columns: subgrid;
+  grid-template-rows: auto;
   gap: 0.75rem 0;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
   button {
+    display: none;
     cursor: pointer;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: none;
     width: fit-content;
     border: none;
-    grid-area: arrow-right;
+    grid-column: 12 / 13;
     z-index: 2;
     position: absolute;
     right: 0;
@@ -234,7 +243,7 @@ article h2 + p {
       svg {
         transform: rotate(180deg);
       }
-      grid-area: arrow-left;
+      grid-column: 1 / 2;
       right: unset;
       left: 0;
     }
@@ -248,10 +257,12 @@ article h2 + p {
   }
   .container {
     height: 100%;
-    grid-area: slider;
+    grid-column: 3 / 11;
+    @media (max-width: 1024px) {
+      grid-column: 1 / -1;
+    }
     position: relative;
     overflow-x: scroll;
-    scrollbar-width: none;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -263,7 +274,7 @@ article h2 + p {
       cursor: grab;
     }
     &:active {
-      cursor: w-resize;
+      cursor: ew-resize;
     }
     img {
       position: relative;
@@ -283,33 +294,47 @@ article h2 + p {
   }
   figcaption {
     height: auto;
-    grid-area: caption;
+    grid-column: 3 / 11;
+    @media (max-width: 1024px) {
+      grid-column: 1 / -1;
+    }
     font-size: 1rem;
     font-family: var(--anti-light-font);
   }
 }
 form {
+  position: relative;
   font-size: var(--text-xs);
   margin-top: 5rem;
   > * + * {
     margin-top: 32px;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 450px) {
     p {
       width: 60%;
     }
   }
-  div {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    @media (min-width: 768px) {
+      align-items: baseline;
+      flex-direction: row;
+    }
     input {
+      z-index: 1;
       &[type="email"] {
         position: relative;
         margin-top: 0.5rem;
         background: transparent;
+        max-width: 33.75rem;
         color: var(--primary);
         border: 1px solid var(--primary);
         padding: 1rem 1.5rem;
         width: 75%;
         margin-right: 2rem;
+        background: var(--background);
       }
       &[type="submit"] {
         cursor: pointer;
@@ -317,8 +342,7 @@ form {
         text-underline-offset: 0.25rem;
         padding-bottom: 0.25rem;
         background: transparent;
-        transition: 0s;
-        transition-delay: .3s;
+        transition: none;
       }
       &:active,
       &:focus {
@@ -349,14 +373,56 @@ footer {
   > a {
     color: var(--primary);
     text-underline-offset: 0.25rem;
-    &:hover{
+    &:hover {
       color: var(--secondary);
     }
   }
 }
 
-.intro .group ~ * {
-  margin-top: 2.25rem;
+.intro {
+  position: relative;
+  .group ~ * {
+    margin-top: 2.25rem;
+  }
+}
+
+.sticker {
+  position: absolute;
+  z-index: 10;
+  scale: 0.75;
+  transition-delay: 0.25s;
+  &:hover {
+    transition: 0s;
+    scale: 1;
+  }
+  img {
+    width: clamp(10rem, 20vw, 15rem);
+  }
+  margin: 0;
+}
+.container .sticker {
+  transform: rotate(20deg);
+  top: 50%;
+  left: 8%;
+}
+.intro .sticker {
+  transform: rotate(-20deg);
+  top: 15%;
+  right: 0;
+  display: none;
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+form .sticker {
+  right: 0;
+  bottom: 50%;
+  z-index: 0;
+  transform: rotate(20deg);
+  @media (max-width: 450px) {
+    bottom: 0;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -374,26 +440,26 @@ footer {
     }
   }
   .intro {
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-auto-rows: max-content;
     .group {
-      grid-column: 1 / 10;
       & + * {
         margin-top: 2.25rem;
-      }
-      & ~ * {
-        margin-top: 2.25rem;
-        grid-column: 3 / 11;
       }
     }
   }
 }
 @media screen and (min-width: 1024px) {
   .intro {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-auto-rows: max-content;
     .group {
+      grid-column: 1 / 10;
       & + * {
-        margin-top: 7.5rem;
+        margin-top: 7.5;
+      }
+      & ~ * {
+        margin-top: 2.25rem;
+        grid-column: 3 / 11;
       }
     }
   }
