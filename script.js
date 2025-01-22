@@ -120,7 +120,10 @@ function handleMouseMove(e) {
   const rotation = currentAngle - startAngle;
   circle.style.transform = `rotate(${rotation % rotationalDirection}deg)`;
   circle.dataset.rotation = rotation % rotationalDirection;
-  document.body.style.setProperty("--rotation", `${rotationalDirection + (rotation % rotationalDirection)}deg`);
+  document.body.style.setProperty(
+    "--rotation",
+    `${rotationalDirection + (rotation % rotationalDirection)}deg`
+  );
 }
 
 function handleMouseUp() {
@@ -160,12 +163,14 @@ mediaQuery.addEventListener("change", handleScreenChange);
 // Slider stuff
 const slider = document.querySelector(".slider");
 const images = document.querySelectorAll(".slider img");
-const imageContainer = document.querySelector(".slider .container")
-const caption = document.querySelector(".slide");
+const imageContainer = document.querySelector(".slider .container");
+const captionNumber = document.querySelector(".slide");
+const captionText = document.querySelector(".slider figcaption");
 const slideAmount = images.length;
 
 let globalCurrentSlide = 0;
-const [backwardButton, forwardButton] = slider.querySelectorAll(":scope > button");
+const [backwardButton, forwardButton] =
+  slider.querySelectorAll(":scope > button");
 
 // Utility to set the active slide
 const setActiveSlide = (slideIndex) => {
@@ -177,7 +182,8 @@ const setActiveSlide = (slideIndex) => {
 
 // Slide function
 const slideFunc = (direction) => {
-  globalCurrentSlide = (globalCurrentSlide + direction + slideAmount) % slideAmount;
+  globalCurrentSlide =
+    (globalCurrentSlide + direction + slideAmount) % slideAmount;
   setActiveSlide(globalCurrentSlide);
 
   images[globalCurrentSlide].scrollIntoView({
@@ -188,9 +194,24 @@ const slideFunc = (direction) => {
   });
 };
 
+// caption array
+const captions = [
+  "Annika Geurtsen, strategist and partner at JUST opening the event.",
+  "Our audience is listening attentively to the speakers",
+  "Fresco San-Sin brought some nice objects to start a conversation and explain accessibility.",
+  "Annika and Fresco prepping the event.",
+  "Full house at our studio.",
+  "Tizian Fendt, UX designer at JUST talking about why accessibility matters.",
+  "And of course we also arranged some nice bread, butter, soup and drinks.",
+  "Tizian Fendt, UX designer at JUST talking about why accessibility matters.",
+  "Fresco San-Sin talking about the accessibility of an old fire alarm.",
+];
 // Update caption text
 const updateCaption = (slideIndex) => {
-  caption.textContent = `${slideIndex + 1}/${slideAmount}`;
+  captionNumber.textContent = ``;
+  captionText.innerHTML = `<span>${slideIndex + 1}/${slideAmount}</span> ${captions[slideIndex + 0]}`
+  console.log(captionText.textContent);
+  
 };
 
 // Intersection observer to track visibility
@@ -231,9 +252,9 @@ imageContainer.addEventListener("mousedown", (e) => {
 imageContainer.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
-imageContainer.addEventListener("mouseleave", ()=> {
+imageContainer.addEventListener("mouseleave", () => {
   isMouseDown = false;
-})
+});
 
 // Set to document so you can keep mouse moving across the page
 imageContainer.addEventListener("mousemove", (e) => {
@@ -256,16 +277,16 @@ backwardButton.style.display = "flex";
 forwardButton.style.display = "flex";
 imageContainer.style.scrollbarWidth = "none";
 // All img containers I want to put random stickers in
-const stickerSpots = document.querySelectorAll(".sticker img")
+const stickerSpots = document.querySelectorAll(".sticker img");
 // All the assets, using a for loop to get them out of the Stickers directory without server side code
-const stickerOptions = []
+const stickerOptions = [];
 for (let i = 1; i < 25; i++) {
-  stickerOptions.push(`./assets/Stickers/sticker${i}.svg`)
+  stickerOptions.push(`./assets/Stickers/sticker${i}.svg`);
 }
-// For each item in stickerSpots, create a random integer (rounded number) based on the length of the stickerOptions array, 
+// For each item in stickerSpots, create a random integer (rounded number) based on the length of the stickerOptions array,
 // set the src of the spot as nth stickerOption, splice (remove) the set option out of the array.
-stickerSpots.forEach(stickerSpot => {
-  const randomInt = Math.floor(Math.random() * stickerOptions.length)
-  stickerSpot.src = stickerOptions[randomInt]
-  stickerOptions.splice(randomInt, 1)
+stickerSpots.forEach((stickerSpot) => {
+  const randomInt = Math.floor(Math.random() * stickerOptions.length);
+  stickerSpot.src = stickerOptions[randomInt];
+  stickerOptions.splice(randomInt, 1);
 });
