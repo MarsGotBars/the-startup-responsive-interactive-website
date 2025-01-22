@@ -1,5 +1,5 @@
 # [Bread & Butter | JUST](https://marsgotbars.github.io/the-startup-responsive-interactive-website/)
-Bij JUST werd onlangs een evenement georganiseerd waarvoor ze een recap-website wilden. Hiermee konden mensen die het evenement hadden gemist, de belangrijkste hoogtepunten terugkijken.
+Een interactieve recap-website voor het evenement van JUST, met thema-opties, een slider, een interactief draaiend rondje, en randomized kleuren. De website is volledig responsief en biedt een toegankelijke gebruikerservaring.
 
 ## Beschrijving
 De website biedt zowel een light als dark theme, met de optie om dit automatisch aan te passen aan je systeeminstellingen. Functioneel bevat de website dus een light/dark/os select, een slider met plaatjes en als kleine extra kun je ook het rondje draaien!
@@ -29,20 +29,63 @@ Laat hier zien hoe je website responsive is. Toon een screenshot per breakpoint 
 
 ### Mobile
 <img width="495" alt="Screenshot 2025-01-22 at 12 35 39" src="https://github.com/user-attachments/assets/3f453af9-9f7a-408d-8c7e-27d878271103" />
+
 Dit is de default (mobile first) weergave.
 De mobiele weergave is weergeven tot 769px, waarbij de tablet weergave start
 One column.
+
 ### Tablet
 <img width="680" alt="Screenshot 2025-01-22 at 12 35 24" src="https://github.com/user-attachments/assets/f3a16c89-2fd6-477e-97b8-e45c2c62e4ff" />
+
 vanaf 769 loopt deze door tot 1024px, waarbij de laptop weergave start
 Nog steeds one column.
+
 ### Desktop
 <img width="793" alt="Screenshot 2025-01-22 at 12 35 31" src="https://github.com/user-attachments/assets/e8454743-641d-48e2-a9b5-1ae7863224d4" />
+
 Lijkt op een one column maar de items staan erg veel verdeelt
 
 Kenmerken
-Bij 'Kenmerken' staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met JS gedaan en hoe?
+## Kenmerken
 
-Leg hier in grote lijnen uit hoe de interacties werken met HTML, CSS en JS en verwijs naar code in je repo.
+- **Toegankelijkheid**: Ondersteunt `prefers-reduced-motion` voor gebruikers die animaties willen minimaliseren. Focusstijlen met `outline` verbeteren de navigatie voor toetsenbordgebruikers en zijn goed zichtbaar gemaakt.
+- **Schaalbaarheid**: Gebruik van CSS-variabelen zoals `--primary` en `--secondary` maakt het eenvoudig om thema’s aan te passen. Responsief ontwerp met media queries en `clamp()` zorgt voor consistentie op verschillende schermformaten.
+- **Animaties**: Geoptimaliseerd met `@keyframes` en ondersteuning voor voorkeuren van gebruikers via `prefers-reduced-motion`.
+- **Efficiëntie**: Gecentraliseerd gebruik van variabelen en gestroomlijnde structuren voor onderhoudsvriendelijke en herbruikbare code.
+- **HTML**: Opgebouwd met semantische HTML, zo zijn divjes alleen gebruikt voor positionering en is er waar mogelijk gebruikt van elementen met waarde zoals `<header>`, `<main>`, `<footer>` en `<article>`'s
 
-Bij kenmerken toon je ook de code conventies die je tijdens de workshop Refactoring en Code Conventions hebt gemaakt.
+### Hoe werken de interacties?
+
+#### Thema
+Door middel van een data type op de body te zetten, word er bepaald welke waardes de css variables bevatten, zo bevat de --primary css variabele de `--dark-gray` variabele op light mode en `--white` variabele op dark mode (Deze word voornamelijk gebruikt voor teksten)
+##### Dit is grotendeels gedaan met JS voor de thema selectie.
+Hierbij is er ook gedacht aan:
+- **Het onthouden van thema & thema selectie (op de select) in [`localstorage`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L21-L27)**
+- **Wat als de gebruiker zijn [`systeem kleur`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L48-L52) verandert terwijl hij/zij op de pagina zit?**
+- **Gesepareerde secundaire kleuren voor beide light/dark mode [`ivm met contrast`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L55-L56) en het [`random toepassen`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L59-L80) hiervan**
+
+[Live versie](https://marsgotbars.github.io/the-startup-responsive-interactive-website/)
+
+#### Slider
+Een image slider die ook kan werken [`zonder javascript`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/styling/main.css#L267-L274).
+Dit is gedaan door het een scroll overflow te geven en deze vervolgens weg te halen met javascript. Hierdoor zal deze weer in beeld komen wanneer javascript uit staat.
+Hierdoor heb ik ook kunnen werken met een [`intersectionObserver om te achterhalen welke slide nu in beeld is`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L217C1-L236C48), om vervolgens aan te passen welk slide nummer & tekst hierbij horen.
+
+Ook is er aan gedacht om te kunnen sliden d.m.v. [`mouse drag`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L241-L272)
+
+[Live versie](https://marsgotbars.github.io/the-startup-responsive-interactive-website/#:~:text=1/9%20Tizian%20Fendt%2C%20UX%20designer%20at%20JUST%20talking%20about%20why%20accessibility%20matters.)
+
+#### Extra
+Als gebruiker kun je het draaiende rondje zelf spinnen!
+
+Hierbij is er ook gedacht aan:
+
+- **[Hoe verder de muis van het midden af zit, hoe langzamer het gaat](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L97-L105) (draait mee met de muis)**
+- **In de code kan aangegeven worden of je wil dat het links-om draait of rechts-om door 1 variabele om te zetten van [`-360 naar 360`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L116)**
+- **gebruik gemaakt van matchMedia om te checken of het wel [bruikbaar is op het toestel](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L151) (dit is gebouwd voor desktop momenteel, dus check ik op screen size)**
+
+##### Algemene code conventies
+[Voor css maak ik gebruik van kebab-casing](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/styling/base.css#L154C1-L154C17)
+
+[In JS maak ik gebruik van camelCasing](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L89)
+
