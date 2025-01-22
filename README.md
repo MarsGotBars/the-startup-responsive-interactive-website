@@ -84,6 +84,30 @@ Hierbij is er ook gedacht aan:
 - **In de code kan aangegeven worden of je wil dat het links-om draait of rechts-om door 1 variabele om te zetten van [`-360 naar 360`](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L116)**
 - **gebruik gemaakt van matchMedia om te checken of het wel [bruikbaar is op het toestel](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/script.js#L151) (dit is gebouwd voor desktop momenteel, dus check ik op screen size)**
 
+#### Randomization
+- **Kleuren**: [Op pagina load word de `--secondary` property aangepast](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/bfda0feab667930d60f9ab2d764485aa1dcdb809/script.js#L55-L77) naar een van de 3 (per thema) kleuren die een goed contrast hebben met dat thema.
+- **Stickers**: Op pagina load worden er 3 stickers uitgekozen en op de pagina geplaatst, zie hieronder voor een meer in-depth uitleg.
+
+Om typ werk te voorkomen heb ik alle images genummerd van sticker1 tot sticker24, zo kan ik ze allemaal met een for loop in een array zetten, met een random nummer een item als src zetten en deze vervolgens uit de array halen, zo komen er geen dubbele exemplaren voor op de pagina, de alt laat ik leeg omdat deze stickers niets inhoudelijks toevoegen aan de pagina. 
+
+<sub>in het geval dat deze wel nodig is, is er alleen een array aan alt teksten nodig.</sub>
+```js
+// All img containers I want to put random stickers in
+const stickerSpots = document.querySelectorAll(".sticker img");
+// All the assets, using a for loop to get them out of the Stickers directory without server side code
+const stickerOptions = [];
+for (let i = 1; i < 25; i++) {
+  stickerOptions.push(`./assets/Stickers/sticker${i}.svg`);
+}
+// For each item in stickerSpots, create a random integer (rounded number) based on the length of the stickerOptions array,
+// set the src of the spot as nth stickerOption, splice (remove) the set option out of the array.
+stickerSpots.forEach((stickerSpot) => {
+  const randomInt = Math.floor(Math.random() * stickerOptions.length);
+  stickerSpot.src = stickerOptions[randomInt];
+  stickerOptions.splice(randomInt, 1);
+});
+```
+
 ##### Algemene code conventies
 [Voor css maak ik gebruik van kebab-casing](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/9658039a4914c7c97c49adc081d72c206c773d82/styling/base.css#L154C1-L154C17)
 
