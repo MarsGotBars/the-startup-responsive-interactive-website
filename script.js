@@ -209,9 +209,7 @@ const captions = [
 // Update caption text
 const updateCaption = (slideIndex) => {
   captionNumber.textContent = ``;
-  captionText.innerHTML = `<span>${slideIndex + 1}/${slideAmount}</span> ${captions[slideIndex + 0]}`
-  console.log(captionText.textContent);
-  
+  captionText.innerHTML = `<span>${slideIndex + 1}/${slideAmount}</span> ${captions[slideIndex + 0]}`  
 };
 
 // Intersection observer to track visibility
