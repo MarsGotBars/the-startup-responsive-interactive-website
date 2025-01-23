@@ -106,7 +106,7 @@ body[data-theme="light"] {
 /* quote */
 .xl {
   font-family: var(--anti-light-font), sans-serif;
-  font-size: clamp(var(--text-lg), 8vw, var(--text-xl));
+  font-size: clamp(var(--text-lg), 5vw, var(--text-xl));
   line-height: clamp(var(--line-lg), 4vw, var(--line-xl));
 }
 /* h1 subtext */
