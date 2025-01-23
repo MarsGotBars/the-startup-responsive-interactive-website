@@ -79,7 +79,7 @@ body {
   @media (min-width: 1024px) {
     margin: 3.75rem auto;
   }
-  font-family: var(--anti-font);
+  font-family: var(--anti-font), Georgia;
   transition: background var(--global-transition);
 }
 
@@ -105,13 +105,13 @@ body[data-theme="light"] {
 }
 /* quote */
 .xl {
-  font-family: var(--anti-light-font);
+  font-family: var(--anti-light-font), sans-serif;
   font-size: clamp(var(--text-lg), 8vw, var(--text-xl));
   line-height: clamp(var(--line-lg), 4vw, var(--line-xl));
 }
 /* h1 subtext */
 .lg {
-  font-family: var(--anti-light-font);
+  font-family: var(--anti-light-font), sans-serif;
   font-size: clamp(var(--text-md), 3vw, var(--text-lg));
   line-height: var(--line-lg);
 }
@@ -122,12 +122,12 @@ body[data-theme="light"] {
   line-height: var(--line-lg);
   font-weight: 400;
   @media (min-width: 1024px) {
-    font-family: var(--anti-light-font);
+    font-family: var(--anti-light-font), sans-serif;
   }
 }
 /* sm text */
 .sm {
-  font-family: var(--anti-light-font);
+  font-family: var(--anti-light-font), sans-serif;
   font-size: clamp(var(--text-xxs), 2vw, var(--text-xs));
 }
 

@@ -102,7 +102,7 @@ main {
 h1 {
   span {
     font-weight: 400;
-    font-family: var(--para-font);
+    font-family: var(--para-font), Arial;
     color: var(--secondary);
     word-wrap: break-word;
     hyphens: auto;
@@ -139,7 +139,7 @@ select {
   color: var(--black);
   padding: 0.5rem 0.625rem;
   text-transform: uppercase;
-  font-family: var(--anti-font);
+  font-family: var(--anti-font), Georgia;
   appearance: none;
   text-align: center;
   transition-delay: 0.25s;
@@ -169,7 +169,7 @@ article h2 + p {
   > p {
     line-height: var(--line-sm);
     font-size: var(--text-xs);
-    font-family: var(--anti-light-font);
+    font-family: var(--anti-light-font), sans-serif;
   }
   &::before {
     content: "“";
@@ -304,7 +304,7 @@ article h2 + p {
       grid-column: 1 / -1;
     }
     font-size: 1rem;
-    font-family: var(--anti-light-font);
+    font-family: var(--anti-light-font), sans-serif;
   }
 }
 form {
