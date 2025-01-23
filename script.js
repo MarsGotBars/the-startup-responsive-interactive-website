@@ -65,8 +65,8 @@ function getRandomColor(colorArray) {
 function setRandomSecondaryColor() {
   // Main body (dark theme)
   const darkTheme = getRandomColor(darkThemeColors);
-  document.body.style.setProperty("--secondary", `var(${darkTheme})`);
-  document.body.style.setProperty("--selection", `var(${darkTheme})`);
+  bodyTheme.style.setProperty("--secondary", `var(${darkTheme})`);
+  bodyTheme.style.setProperty("--selection", `var(${darkTheme})`);
 
   // Light theme body
   const lightBody = document.querySelector('body[data-theme="light"]');
@@ -208,7 +208,9 @@ const captions = [
 // Update caption text
 const updateCaption = (slideIndex) => {
   captionNumber.textContent = ``;
-  captionText.innerHTML = `<span>${slideIndex + 1}/${slideAmount}</span> ${captions[slideIndex + 0]}`  
+  captionText.innerHTML = `<span>${slideIndex + 1}/${slideAmount}</span> ${
+    captions[slideIndex + 0]
+  }`;
 };
 
 // Intersection observer to track visibility
@@ -287,3 +289,55 @@ stickerSpots.forEach((stickerSpot) => {
   stickerSpot.src = stickerOptions[randomInt];
   stickerOptions.splice(randomInt, 1);
 });
+
+// Element to watch
+const opacityText = document.querySelector("h1");
+// How far up should the element be before adding eventListeners
+const percentage = 40;
+
+const opacityOptions = {
+  root: null, // Use the viewport
+  rootMargin: `-${percentage}% 0px 0px 0px`,
+  threshold: [0, 1],
+};
+
+function scrollingEvents(element) {
+  const rect = element.getBoundingClientRect();
+  const elementHeight = rect.height;
+
+  const viewportHeight = window.innerHeight;
+  const marginTop = viewportHeight * (percentage / 100);
+  const distanceFromMargin = rect.top - marginTop;
+
+  // Ensure elementHeight > 0 to prevent division errors
+  if (elementHeight > 0) {
+    // Calculate opacity based on position
+    const opacity = Math.min(
+      1,
+      Math.max(0.3, 1 - (distanceFromMargin / elementHeight) * .5)
+    );
+    bodyTheme.style.setProperty("--custom-opacity", opacity.toFixed(2)); // Apply opacity
+  } else return
+}
+
+// Define the scroll handler outside the observer callback
+function onScroll() {
+  scrollingEvents(opacityText);
+}
+
+function opacityCallback(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      // Add scroll listener when element is in view
+      console.log("added");
+      document.addEventListener("scroll", onScroll);
+    } else {
+      // Remove scroll listener when element is out of view
+      console.log("removed");
+      document.removeEventListener("scroll", onScroll);
+    }
+  });
+}
+
+let opacityObserver = new IntersectionObserver(opacityCallback, opacityOptions);
+opacityObserver.observe(opacityText);

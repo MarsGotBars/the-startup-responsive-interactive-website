@@ -102,6 +102,7 @@ main {
 }
 
 h1 {
+  z-index: 2;
   span {
     font-weight: 400;
     font-family: var(--para-font), Arial;
@@ -315,7 +316,7 @@ article h2 + p {
   }
 }
 form {
-  h2{
+  h2 {
     position: relative;
     z-index: 1;
   }
@@ -415,6 +416,7 @@ footer {
     scale: 1;
   }
   img {
+    max-height: 12.5rem;
     width: clamp(10rem, 20vw, 15rem);
   }
   margin: 0;
@@ -438,7 +440,7 @@ form .sticker {
   right: 0;
   bottom: 10%;
   z-index: 0;
-  transform: rotate(20deg);
+  transform: rotate(10deg);
   @media (max-width: 450px) {
     bottom: 0;
   }
@@ -464,7 +466,7 @@ form .sticker {
   }
 }
 @media screen and (min-width: 1024px) {
-  main{
+  main {
     article {
       grid-column: 3 / 11;
     }
@@ -484,4 +486,9 @@ form .sticker {
       }
     }
   }
+}
+
+/* Testing out in js */
+main:not(:empty) {
+  opacity: var(--custom-opacity);
 }
