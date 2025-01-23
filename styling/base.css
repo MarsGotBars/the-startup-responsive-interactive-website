@@ -36,7 +36,7 @@ body {
   --background: var(--black);
   --primary: var(--white);
   --secondary: var(--yellow);
-  --selection: var(--orange);
+  --selection: var(--yellow);
   --selection-color: var(--dark-gray);
 
   --custom-hover: var(--white);
@@ -88,7 +88,7 @@ body[data-theme="light"] {
   --background: var(--white);
   --primary: var(--dark-gray);
   --secondary: var(--orange);
-  --selection: var(--yellow);
+  --selection: var(--orange);
   --selection-color: var(--white);
 
   --theme-bg: var(--black);

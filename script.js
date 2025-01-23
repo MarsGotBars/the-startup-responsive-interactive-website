@@ -20,7 +20,7 @@ const getInitialTheme = () => {
 // Set theme and save to localStorage
 const setTheme = (theme) => {
   bodyTheme.setAttribute("data-theme", theme);
-  // store which theme the user prefers (this is for the theme)
+  // store which theme the user prefers (this is for the theme, not the select)
   localStorage.setItem("theme", theme);
   // randomize on each call
   setRandomSecondaryColor();
@@ -39,6 +39,7 @@ selectElement.addEventListener("change", (event) => {
   localStorage.setItem("selected", selectedValue);
 });
 
+// Check OS theme
 const getOsTheme = () => {
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
   setTheme(isDarkMode ? "dark" : "light");
@@ -187,10 +188,8 @@ const slideFunc = (direction) => {
   setActiveSlide(globalCurrentSlide);
 
   images[globalCurrentSlide].scrollIntoView({
-    // Weirdly setting this to smooth fixes the jitter
     behavior: "smooth",
-    block: "nearest",
-    inline: "center",
+    block: "center",
   });
 };
 
@@ -282,7 +281,7 @@ for (let i = 1; i < 25; i++) {
   stickerOptions.push(`./assets/Stickers/sticker${i}.svg`);
 }
 // For each item in stickerSpots, create a random integer (rounded number) based on the length of the stickerOptions array,
-// set the src of the spot as nth stickerOption, splice (remove) the set option out of the array.
+// Set the src of the spot as nth stickerOption, splice (remove) the set option out of the array.
 stickerSpots.forEach((stickerSpot) => {
   const randomInt = Math.floor(Math.random() * stickerOptions.length);
   stickerSpot.src = stickerOptions[randomInt];

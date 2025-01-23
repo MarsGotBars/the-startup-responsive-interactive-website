@@ -13,6 +13,7 @@ body {
   }
 }
 
+/* change how the default focus looks */
 *:focus {
   outline: 3px auto var(--primary);
   outline-offset: 0.25rem;
@@ -64,6 +65,7 @@ body > .container {
     }
   }
 }
+/* spin animation, --rotation is changed in js to keep it contininuous no matter the rotation */
 @keyframes spin-it {
   to {
     transform: rotate(var(--rotation));
@@ -181,6 +183,7 @@ article h2 + p {
   }
 }
 
+/* Slider */
 .slider {
   /* Use this to avoid overflowing vertically, in turn causing the text to center */
   max-height: 80vh;
@@ -195,6 +198,7 @@ article h2 + p {
     margin-left: -20px;
     margin-right: -20px;
   }
+  /* slider buttons */
   button {
     margin: 0 auto;
     display: none;
@@ -221,7 +225,7 @@ article h2 + p {
         scale: 1.1;
       }
     }
-    /* move transitions and animations up */
+    /* arrows */
     svg {
       width: clamp(4rem, 8vw, 10rem);
       transition: 0.1s ease-in-out;
@@ -257,6 +261,7 @@ article h2 + p {
       position: static;
     }
   }
+  /* Image container */
   .container {
     /* margin: 0 auto; */
     height: 100%;
@@ -267,9 +272,9 @@ article h2 + p {
     position: relative;
     overflow-x: scroll;
     overflow-y: hidden;
+    /* this clashes with scrollIntoView */
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    /* max-width: 48rem; */
     width: 100%;
     display: flex;
     gap: 1rem;
@@ -281,6 +286,7 @@ article h2 + p {
       cursor: ew-resize;
     }
     img {
+      height: 100%;
       object-fit: cover;
       position: relative;
       transition: 0.5s ease;
@@ -297,6 +303,7 @@ article h2 + p {
       }
     }
   }
+  /* caption under container */
   figcaption {
     height: auto;
     grid-column: 3 / 11;
@@ -323,6 +330,7 @@ form {
       width: 60%;
     }
   }
+  /* wrap both inputs to add the label above it */
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -439,9 +447,6 @@ form .sticker {
 @media screen and (min-width: 768px) {
   main {
     grid-template-columns: repeat(12, 1fr);
-    article {
-      grid-column: 3 / 11;
-    }
   }
   .quote-container {
     grid-column: 2 / 12;
@@ -459,6 +464,11 @@ form .sticker {
   }
 }
 @media screen and (min-width: 1024px) {
+  main{
+    article {
+      grid-column: 3 / 11;
+    }
+  }
   .intro {
     display: grid;
     grid-template-columns: subgrid;
