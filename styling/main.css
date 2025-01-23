@@ -401,8 +401,13 @@ footer {
 
 .intro {
   position: relative;
-  .group ~ * {
-    margin-top: 2.25rem;
+  .group {
+    h1{
+      margin-bottom: 1rem;
+    }
+    &~ * {
+      margin-top: 2.25rem;
+    }
   }
 }
 
@@ -476,6 +481,9 @@ form .sticker {
     grid-template-columns: subgrid;
     grid-auto-rows: max-content;
     .group {
+      h1{
+        margin-bottom: 2.25rem;
+      }
       grid-column: 1 / 10;
       & ~ * {
         margin-top: 2.25rem;
