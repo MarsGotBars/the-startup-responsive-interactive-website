@@ -95,7 +95,7 @@ const circle = document.getElementById("circle");
 let isDragging = false;
 let startAngle = 0;
 
-// mathmatical calculation to move the circle based on how far away / close the mouse is
+// ! mathmatical calculation to move the circle based on how far away / close the mouse is
 function calculateAngle(e, element) {
   const rect = element.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
@@ -316,7 +316,23 @@ function scrollingEvents(element) {
       1,
       Math.max(0.3, 1 - (distanceFromMargin / elementHeight) * .5)
     );
-    bodyTheme.style.setProperty("--custom-opacity", opacity.toFixed(2)); // Apply opacity
+    // bodyTheme.style.setProperty("--custom-opacity", opacity.toFixed(2)); // Apply opacity
+    console.log(opacity);
+    console.log(element);
+    const placeholder = element.textContent.split("")
+    let emptystring
+    placeholder.forEach(letter => {
+      letter = `<span>${letter}</span>`
+      emptystring += letter
+    });    
+    console.log(emptystring);
+    
+    // element.textContent = placeholder
+    if(element != emptystring){
+      // element.textContent = emptystring
+    }
+    // const stuff = element.split(" ")
+
   } else return
 }
 
