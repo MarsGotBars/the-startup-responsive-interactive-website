@@ -11,6 +11,8 @@ De select heeft een hover (feedforward), bevat de tekst van het geselecteerde th
 
 [Ook bevat de select een OS mode, hierbij wordt er met JS en matchMedia gekeken of er een verandering is in het systeem thema, zo wel, dan past de pagina zich gelijk aan.](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/4f723d20e1b8a822bcca2546ae63682dde6c8499/script.js#L48-L53)
 
+Dit maakt gebruik van het [timing principle](https://medium.com/@ruthiran_b/disneys-motion-principles-in-designing-interface-animations-9ac7707a2b43#:~:text=the%20next%20thing.-,Timing,-In%20traditional%20animation).
+
 ### Slider
 https://github.com/user-attachments/assets/3e31fa62-3e91-49f0-a01d-0d270c2333e8
 #### Ontwerkpkeuzes
