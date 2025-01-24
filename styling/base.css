@@ -39,7 +39,7 @@ body {
   --selection: var(--yellow);
   --selection-color: var(--dark-gray);
 
-  --custom-opacity: .3;
+  --custom-opacity: 1;
 
   --custom-hover: var(--white);
 
