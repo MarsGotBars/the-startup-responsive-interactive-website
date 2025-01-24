@@ -9,6 +9,8 @@ https://github.com/user-attachments/assets/8b3e740f-a6c0-418e-ab3c-e273ff5500ed
 #### Ontwerkpkeuzes
 De select heeft een hover (feedforward), bevat de tekst van het geselecteerde thema (feedback) en de pagina heeft een korte transition tussen themas, zodat de gebruiker weet dat het thema aan het veranderen is. (feedforward)
 
+[Ook bevat de select een OS mode, hierbij wordt er met JS en matchMedia gekeken of er een verandering is in het systeem thema, zo wel, dan past de pagina zich gelijk aan.](https://github.com/MarsGotBars/the-startup-responsive-interactive-website/blob/4f723d20e1b8a822bcca2546ae63682dde6c8499/script.js#L48-L53)
+
 ### Slider
 https://github.com/user-attachments/assets/3e31fa62-3e91-49f0-a01d-0d270c2333e8
 #### Ontwerkpkeuzes
